@@ -43,10 +43,14 @@ require_once("$CFG->dirroot/mod/brainpop/lib.php");
 */
 function brainpop_appears_valid_url($url)
 {
-//Maybe check here to make sure URL is reachable?
 	return (bool)preg_match('%^http(s)?\:\/\/(www\.)?brainpop(esl|jr)?\.(com|fr|co\.uk)%' , $url );
 }
 
+function brainpop_get_domain($url)
+{ 
+	$url = parse_url($url);
+	return $url['host'];
+}
 
 /**
  * Fix common URL problems that we want teachers to see fixed
@@ -85,7 +89,9 @@ function brainpop_get_login_url( $item )
 	$u = $config->brainpopusername;
 	$p = $config->brainpoppassword;
 	
-	$url = 'http://www.brainpop.com/user/loginDo.weml?user='.$u.'&password='.$p.'&targetPage=';
+	$domain = brainpop_get_domain($item->externalurl);
+	
+	$url = 'http://'.$domain.'/user/loginDo.weml?user='.$u.'&password='.$p.'&targetPage=';
 		$url .= urlencode($item->externalurl);
 
 	return $url;
