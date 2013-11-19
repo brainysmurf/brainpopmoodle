@@ -43,7 +43,7 @@ require_once("$CFG->dirroot/mod/brainpop/lib.php");
 */
 function brainpop_appears_valid_url($url)
 {
-	return (bool)preg_match('%^http(s)?\:\/\/(www\.)?brainpop(esl|jr)?\.(com|fr|co\.uk)%' , $url );
+	return (bool)preg_match('%^http(s)?\:\/\/(www\.|esp\.|esl\.)?brainpop(esl|jr)?\.(com|fr|co\.uk)%' , $url );
 }
 
 function brainpop_get_domain($url)
